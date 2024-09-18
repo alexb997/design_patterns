@@ -48,7 +48,7 @@ You should see output showing the description and cost of different coffee combi
 
    *Create Coffee.java, BasicCoffee.java, CoffeeDecorator.java, MilkDecorator.java, and SugarDecorator.java in the src/coffee directory.
    *Create Main.java in the src directory.
-   \*Create a README.md file in the root directory with the provided content.
+   *Create a README.md file in the root directory with the provided content.
 
 4. **Compile & run:**
 
