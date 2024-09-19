@@ -1,14 +1,19 @@
+import logger.Logger;
+import logger.Logger.LogMode;
+
 public class Main {
     public static void main(String[] args) {
-        // Access the Logger instance
-        Logger logger1 = Logger.getInstance();
-        Logger logger2 = Logger.getInstance();
+        Logger logger = Logger.getInstance();
 
-        // Log messages using the singleton instance
-        logger1.log("This is the first log message.");
-        logger2.log("This is the second log message.");
+        logger.setLogMode(LogMode.CONSOLE_ONLY);
+        logger.log("This is a console log message.");
 
-        // Check if both loggers are the same instance
-        System.out.println(logger1 == logger2); // This will print 'true', confirming it's the same instance.
+        logger.setLogMode(LogMode.FILE_ONLY);
+        logger.log("This is a file log message.");
+
+        logger.setLogMode(LogMode.BOTH);
+        logger.log("This is a message logged to both console and file.");
+
+        logger.clearLogs();
     }
 }

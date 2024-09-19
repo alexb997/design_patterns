@@ -1,18 +1,24 @@
-# Singleton Logger Example
+# Singleton Pattern Enhanced Example
 
-This is a simple Java project demonstrating the Singleton pattern by implementing a `Logger` class.
+This project demonstrates the Singleton Pattern by creating a `Logger` class that logs messages to the console and/or a file. The logger can dynamically switch between logging modes and provides an option to clear the logs. Each log entry is timestamped.
 
 ## Project Structure
 
-- `src/Logger.java`: Contains the `Logger` class implementing the Singleton pattern.
-- `src/Main.java`: Contains the `Main` class which demonstrates how to use the `Logger` class.
+- `src/logger/Logger.java`: Implements the enhanced `Logger` with console and file logging, log clearing, and timestamping.
+- `src/Main.java`: Demonstrates the usage of the enhanced `Logger`.
+
+## New Features
+
+1. **Log Modes**: You can log to the console, a file, or both.
+2. **Clear Logs**: The logs can be cleared (file logs will be cleared, console logs cannot be).
+3. **Timestamps**: Each log entry is timestamped with the current date and time.
 
 ## How to Run
 
 1. **Compile the Java files:**
 
    ```bash
-   javac src/Logger.java src/Main.java
+   javac src/logger/Logger.java src/Main.java
 
    ```
 
@@ -28,28 +34,29 @@ You should see the log messages printed to the console, and a confirmation that 
 1. **Create the Project Directory:**
 
    ```bash
-   mkdir SingletonLoggerExample
-   cd SingletonLoggerExample
+   mkdir SingletonPatternEnhanced
+   cd SingletonPatternEnhanced
 
    ```
 
 2. **Create the src Directory:**
 
    ```bash
-   mkdir src
+   mkdir src/logger
 
    ```
 
 3. **Create java files:**
 
-   *Create Logger.java and Main.java files in the src directory with the provided code.
-   *Create a README.md file in the root directory with the provided content.
+   *Create Logger.java in the src/logger directory.
+   *Create Main.java in the src directory.
+   \*Create a README.md file in the root directory with the provided content.
 
 4. **Compile & run:**
 
    ```bash
-   javac src/Logger.java src/Main.java
+   javac src/logger/Logger.java src/Main.java
    java -cp src Main
    ```
 
-This structure keeps the project simple and organized. You can expand it with additional classes and packages as needed.
+This updated setup enhances the Singleton Pattern by adding multiple log modes (console, file, or both), the ability to clear logs from the file, and a timestamp for each log entry.
