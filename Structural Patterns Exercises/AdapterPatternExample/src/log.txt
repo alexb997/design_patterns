@@ -1,0 +1,5 @@
+2024-09-19T15:31:23.414346900 - Played file: song1.mp3 with format: mp3
+2024-09-19T15:31:23.418646600 - Played file: movie.mp4 with format: mp4
+2024-09-19T15:31:23.419718900 - Played file: documentary.vlc with format: vlc
+2024-09-19T15:31:23.419718900 - Played file: sound.wav with format: wav
+2024-09-19T15:31:23.419718900 - Played file: unknown.xyz with format: xyz

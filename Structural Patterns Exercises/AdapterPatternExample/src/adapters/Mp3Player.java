@@ -1,12 +1,12 @@
 package adapters;
 
-public class AudioPlayer implements MediaPlayer {
+public class Mp3Player implements MediaPlayer {
     @Override
-    public void play(String fileType, String fileName) {
+    public void play(String fileName, String fileType) {
         if (fileType.equalsIgnoreCase("mp3")) {
             System.out.println("Playing MP3 file: " + fileName);
         } else {
-            System.out.println("Invalid media format: " + fileType);
+            System.out.println("Unsupported format: " + fileType);
         }
     }
 }

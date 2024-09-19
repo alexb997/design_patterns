@@ -1,28 +1,30 @@
 package adapters;
 
-import media.MP4Player;
-import media.VLCPlayer;
+import log.Logger;
 
 public class MediaAdapter implements MediaPlayer {
-    private MP4Player mp4Player;
-    private VLCPlayer vlcPlayer;
+    private Mp3Player mp3Player;
+    private Logger logger;
 
-    public MediaAdapter(String fileType) {
-        if (fileType.equalsIgnoreCase("mp4")) {
-            mp4Player = new MP4Player();
-        } else if (fileType.equalsIgnoreCase("vlc")) {
-            vlcPlayer = new VLCPlayer();
-        }
+    public MediaAdapter() {
+        mp3Player = new Mp3Player();
+        logger = Logger.getInstance();
     }
 
     @Override
-    public void play(String fileType, String fileName) {
-        if (fileType.equalsIgnoreCase("mp4")) {
-            mp4Player.play(fileName);
+    public void play(String fileName, String fileType) {
+        if (fileType.equalsIgnoreCase("mp3")) {
+            mp3Player.play(fileName, fileType);
+        } else if (fileType.equalsIgnoreCase("mp4")) {
+            System.out.println("Playing MP4 file: " + fileName);
         } else if (fileType.equalsIgnoreCase("vlc")) {
-            vlcPlayer.play(fileName);
+            System.out.println("Playing VLC file: " + fileName);
+        } else if (fileType.equalsIgnoreCase("wav")) {
+            System.out.println("Playing WAV file: " + fileName);
         } else {
-            System.out.println("Invalid media format: " + fileType);
+            System.out.println("Unsupported format: " + fileType);
         }
+
+        logger.log("Played file: " + fileName + " with format: " + fileType);
     }
 }
