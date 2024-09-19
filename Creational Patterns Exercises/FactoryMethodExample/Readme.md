@@ -1,13 +1,15 @@
 # Factory Method Pattern Example
 
-This is a Java project demonstrating the Factory Method pattern by implementing a `ShapeFactory` class that creates different shapes.
+This project demonstrates the **Factory Method Pattern** by creating various shapes (Circle, Square, Rectangle) using a factory class.
 
 ## Project Structure
 
-- `src/shapes/Shape.java`: The interface for shapes.
-- `src/shapes/Circle.java`, `src/shapes/Rectangle.java`, `src/shapes/Square.java`: Concrete implementations of shapes.
-- `src/factory/ShapeFactory.java`: The factory class that creates shapes based on type.
-- `src/Main.java`: The main class to demonstrate the use of the factory.
+- `src/shapes/Shape.java`: Interface for all shapes with methods for area and perimeter calculation.
+- `src/shapes/Circle.java`: Concrete implementation of a circle.
+- `src/shapes/Square.java`: Concrete implementation of a square.
+- `src/shapes/Rectangle.java`: Concrete implementation of a rectangle.
+- `src/factory/ShapeFactory.java`: Factory class that creates shapes and manages caching.
+- `src/Main.java`: Entry point to demonstrate shape creation, caching, and usage.
 
 ## How to Run
 
@@ -23,7 +25,7 @@ This is a Java project demonstrating the Factory Method pattern by implementing 
    java -cp src Main
    ```
 
-You should see messages indicating the drawing of a circle, rectangle, and square.
+You should see output demonstrating the creation of shapes with specific and default dimensions, calculation of their areas and perimeters, and caching of shapes.
 
 ## How to Set Up the Project
 
@@ -38,7 +40,8 @@ You should see messages indicating the drawing of a circle, rectangle, and squar
 2. **Create the src Directory:**
 
    ```bash
-   mkdir -p src/shapes src/factory
+   mkdir src/shapes
+   mkdir src/factory
 
    ```
 
@@ -46,8 +49,7 @@ You should see messages indicating the drawing of a circle, rectangle, and squar
 
    *Create Shape.java, Circle.java, Rectangle.java, and Square.java in the src/shapes directory.
    *Create ShapeFactory.java in the src/factory directory.
-   *Create Main.java in the src directory.
-   *Create a README.md file in the root directory with the provided content.
+   \*Create Main.java in the src directory.
 
 4. **Compile & run:**
 
@@ -56,4 +58,4 @@ You should see messages indicating the drawing of a circle, rectangle, and squar
     java -cp src Main
    ```
 
-This structure ensures that the project is organized and follows best practices for implementing the Factory Method pattern.
+This setup demonstrates how to use the Factory Method Pattern to create shapes with various features and caching.

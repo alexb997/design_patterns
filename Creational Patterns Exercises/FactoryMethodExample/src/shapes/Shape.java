@@ -1,5 +1,7 @@
 package shapes;
 
 public interface Shape {
-    void draw();
+    double calculateArea();
+    double calculatePerimeter();
+    String getDescription();
 }
