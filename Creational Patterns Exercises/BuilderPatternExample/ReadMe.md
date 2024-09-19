@@ -1,19 +1,22 @@
 # Builder Pattern Example
 
-This project demonstrates the Builder Pattern by implementing a `ComputerBuilder` class to construct `Computer` objects with optional components.
+This project demonstrates the **Builder Pattern** by constructing `Computer` objects with various attributes including CPU, RAM, Storage, Graphics Card, and Cooling System.
 
 ## Project Structure
 
-- `src/product/Computer.java`: Contains the `Computer` class with a nested `Builder` class.
-- `src/builder/ComputerBuilder.java`: Demonstrates the use of the `Computer` builder to create different `Computer` configurations.
-- `src/Main.java`: Entry point to run the `ComputerBuilder` example.
+- `src/computer/Computer.java`: Contains the `Computer` class and its builder.
+- `src/computer/CoolingSystem.java`: Abstract class for cooling systems.
+- `src/computer/AirCooling.java`: Concrete implementation of air cooling.
+- `src/computer/LiquidCooling.java`: Concrete implementation of liquid cooling.
+- `src/computer/ComputerBuilder.java`: Builder class to construct computers and handle bulk creation.
+- `src/Main.java`: Entry point to demonstrate the building of individual and bulk computers.
 
 ## How to Run
 
 1. **Compile the Java files:**
 
    ```bash
-   javac src/product/Computer.java src/builder/ComputerBuilder.java src/Main.java
+   javac src/computer/*.java src/Main.java
    ```
 
 2. **Run the main class:**
@@ -21,7 +24,7 @@ This project demonstrates the Builder Pattern by implementing a `ComputerBuilder
    java -cp src Main
    ```
 
-You should see output displaying the details of different computer configurations created using the builder pattern.
+You should see output demonstrating the construction of individual computers with various configurations, including cooling systems, and the bulk creation of multiple computers.
 
 ## How to Set Up the Project
 
@@ -36,22 +39,21 @@ You should see output displaying the details of different computer configuration
 2. **Create the src Directory:**
 
    ```bash
-   mkdir -p src/product src/builder
+   mkdir src
+   mkdir src/computer
 
    ```
 
 3. **Create java files:**
 
-   *Create Computer.java in the src/product directory.
-   *Create ComputerBuilder.java in the src/builder directory.
+   *Create Computer.java, CoolingSystem.java, AirCooling.java, LiquidCooling.java, and ComputerBuilder.java in the src/computer directory.
    *Create Main.java in the src directory.
-   *Create a README.md file in the root directory with the provided content.
 
 4. **Compile & run:**
 
    ```bash
-   javac src/product/Computer.java src/builder/ComputerBuilder.java src/Main.java
+   javac src/computer/*.java src/Main.java
    java -cp src Main
    ```
 
-This setup demonstrates how to use the Builder Pattern to create complex objects with optional components, allowing for flexible and readable object creation.
+This setup demonstrates how to use the Builder Pattern to construct complex objects with various configurations and handle bulk creation.
