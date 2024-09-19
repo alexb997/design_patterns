@@ -1,14 +1,15 @@
-# Observer Pattern Example
+# Observer Pattern Enhanced
 
-This project demonstrates the Observer Pattern by creating a `NewsAgency` that sends updates to multiple `Subscriber` objects.
+This project demonstrates the **Observer Pattern** with additional features, including filtering news by type, daily digests, and personalized messages. The Observer Pattern allows objects (subscribers) to observe and react to changes in another object (news agency) without tightly coupling the objects.
 
 ## Project Structure
 
-- `src/observer/Observer.java`: Interface for subscribers to receive updates.
-- `src/observer/Subscriber1.java`: Concrete implementation of a subscriber.
-- `src/observer/Subscriber2.java`: Another concrete implementation of a subscriber.
-- `src/subject/Subject.java`: Interface for the news agency to manage subscribers.
-- `src/subject/NewsAgency.java`: Concrete implementation of a news agency that notifies subscribers.
+- `src/news/NewsType.java`: Enum defining categories of news (e.g., Sports, Politics, Entertainment).
+- `src/news/NewsAgency.java`: Concrete implementation of a news agency that manages and notifies subscribers.
+- `src/subscribers/Subscriber.java`: Interface for all types of subscribers.
+- `src/subscribers/EmailSubscriber.java`: Concrete implementation of a subscriber receiving updates via email.
+- `src/subscribers/SmsSubscriber.java`: Concrete implementation of a subscriber receiving updates via SMS.
+- `src/subscribers/DailyDigestSubscriber.java`: Concrete implementation of a subscriber receiving a daily summary of news.
 - `src/Main.java`: Entry point to demonstrate subscribing, unsubscribing, and receiving news updates.
 
 ## How to Run
@@ -16,7 +17,7 @@ This project demonstrates the Observer Pattern by creating a `NewsAgency` that s
 1. **Compile the Java files:**
 
    ```bash
-   javac src/observer/*.java src/subject/*.java src/Main.java
+   javac src/news/*.java src/subscribers/*.java src/Main.java
    ```
 
 2. **Run the main class:**
@@ -24,38 +25,40 @@ This project demonstrates the Observer Pattern by creating a `NewsAgency` that s
    java -cp src Main
    ```
 
-You should see output showing how subscribers receive news updates and how they can be unsubscribed.
+You should see output demonstrating how subscribers receive news updates based on their preferences, how daily digests are provided, and how personalized messages can be sent.
 
 ## How to Set Up the Project
 
 1. **Create the Project Directory:**
 
    ```bash
-   mkdir ObserverPatternExample
-   cd ObserverPatternExample
+   mkdir ObserverPatternEnhanced
+   cd ObserverPatternEnhanced
 
    ```
 
 2. **Create the src Directory:**
 
    ```bash
-   mkdir src/observer
-   mkdir src/subject
+   mkdir src
+   mkdir src/news
+   mkdir src/subscribers
 
    ```
 
 3. **Create java files:**
 
-   *Create Observer.java, Subscriber1.java, and Subscriber2.java in the src/observer directory.
-   *Create Subject.java and NewsAgency.java in the src/subject directory.
+   *Create NewsType.java in the src/news directory.
+   *Create NewsAgency.java in the src/news directory.
+   *Create Subscriber.java in the src/subscribers directory.
+   *Create EmailSubscriber.java, SmsSubscriber.java, and DailyDigestSubscriber.java in the src/subscribers directory.
    *Create Main.java in the src directory.
-   *Create a README.md file in the root directory with the provided content.
 
 4. **Compile & run:**
 
    ```bash
-   javac src/observer/*.java src/subject/*.java src/Main.java
+   javac src/news/*.java src/subscribers/*.java src/Main.java
    java -cp src Main
    ```
 
-This setup demonstrates how to use the Observer Pattern to manage updates and notifications, making it easy to notify multiple subscribers of changes.
+This setup demonstrates how to use the Observer Pattern with enhancements such as filtering by news type, providing daily summaries, and sending personalized messages.

@@ -1,21 +1,31 @@
-import observer.Subscriber1;
-import observer.Subscriber2;
-import subject.NewsAgency;
+import news.NewsAgency;
+import news.NewsType;
+import subscribers.EmailSubscriber;
+import subscribers.SmsSubscriber;
+import subscribers.DailyDigestSubscriber;
 
 public class Main {
+
     public static void main(String[] args) {
+
         NewsAgency newsAgency = new NewsAgency();
 
-        Subscriber1 subscriber1 = new Subscriber1("Alice");
-        Subscriber2 subscriber2 = new Subscriber2("Bob");
+        EmailSubscriber emailSubscriber1 = new EmailSubscriber("Alice", NewsType.SPORTS);
+        SmsSubscriber smsSubscriber1 = new SmsSubscriber("Bob", NewsType.POLITICS);
+        DailyDigestSubscriber dailyDigestSubscriber = new DailyDigestSubscriber("Charlie", NewsType.ENTERTAINMENT);
 
-        newsAgency.subscribe(subscriber1);
-        newsAgency.subscribe(subscriber2);
+        newsAgency.subscribe(emailSubscriber1);
+        newsAgency.subscribe(smsSubscriber1);
+        newsAgency.subscribe(dailyDigestSubscriber);
 
-        newsAgency.setNews("Breaking News: Observer Pattern Implemented!");
-        
-        newsAgency.unsubscribe(subscriber1);
+        newsAgency.publishNews("Breaking: Sports Championship!", NewsType.SPORTS);
+        newsAgency.publishNews("Election Results Announced!", NewsType.POLITICS);
+        newsAgency.publishNews("New Movie Released!", NewsType.ENTERTAINMENT);
 
-        newsAgency.setNews("More News: Observer Pattern in Action!");
+        newsAgency.viewSubscribers();
+
+        newsAgency.sendPersonalMessage(emailSubscriber1, "Special sports offer for Alice!");
+
+        dailyDigestSubscriber.sendDailyDigest();
     }
 }
