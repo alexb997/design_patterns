@@ -1,14 +1,15 @@
 # Facade Pattern Example
 
-This project demonstrates the Facade Pattern by creating a `HomeTheaterFacade` class to simplify the use of a home theater system with various subsystems.
+This project demonstrates the **Facade Pattern** by simplifying the control of a home theater system with various subsystems using a `HomeTheaterFacade` class.
 
 ## Project Structure
 
-- `src/subsystem/DVDPlayer.java`: Class for DVD player subsystem.
-- `src/subsystem/Projector.java`: Class for projector subsystem.
-- `src/subsystem/SoundSystem.java`: Class for sound system subsystem.
-- `src/facade/HomeTheaterFacade.java`: Facade class to simplify interaction with subsystems.
-- `src/Main.java`: Entry point to demonstrate the use of the facade.
+- `src/subsystem/DVDPlayer.java`: Class for the DVD player subsystem, includes error simulation.
+- `src/subsystem/Projector.java`: Class for the projector subsystem.
+- `src/subsystem/SoundSystem.java`: Class for the sound system, includes volume control.
+- `src/subsystem/LightingSystem.java`: Class for controlling lighting (dim or bright lights).
+- `src/facade/HomeTheaterFacade.java`: Facade class to simplify interaction with the subsystems and handle errors.
+- `src/Main.java`: Entry point demonstrating various modes, volume control, and error handling.
 
 ## How to Run
 
@@ -23,7 +24,31 @@ This project demonstrates the Facade Pattern by creating a `HomeTheaterFacade` c
    java -cp src Main
    ```
 
-You should see output demonstrating the sequence of operations for watching and stopping a movie using the home theater system.
+You should see output similar to the following, demonstrating various modes and volume control:
+
+```bash
+Preparing to watch movie...
+DVD Player is on.
+Projector is on.
+Sound system is on.
+Lights are dimmed for the movie.
+Playing movie: Inception
+Volume set to: 75
+Shutting down the movie...
+DVD Player is off.
+Projector is off.
+Sound system is off.
+Lights are bright.
+Preparing to play music...
+Sound system is on.
+Lights are bright.
+Music is playing.
+Preparing for gaming mode...
+Projector is on.
+Sound system is on.
+Lights are bright.
+Gaming mode activated.
+```
 
 ## How to Set Up the Project
 
@@ -45,10 +70,9 @@ You should see output demonstrating the sequence of operations for watching and 
 
 3. **Create java files:**
 
-   *Create DVDPlayer.java, Projector.java, and SoundSystem.java in the src/subsystem directory.
+   *Create DVDPlayer.java, Projector.java, SoundSystem.java, and LightingSystem.java in the src/subsystem directory.
    *Create HomeTheaterFacade.java in the src/facade directory.
-   *Create Main.java in the src directory.
-   *Create a README.md file in the root directory with the provided content.
+   \*Create Main.java in the src directory.
 
 4. **Compile & run:**
 
@@ -57,4 +81,4 @@ You should see output demonstrating the sequence of operations for watching and 
    java -cp src Main
    ```
 
-This setup demonstrates how to use the Facade Pattern to provide a simple interface for interacting with complex subsystems, making it easier to manage and use them.
+This setup demonstrates how the Facade Pattern simplifies control of multiple subsystems with additional features like mode switching, volume control, and error handling.
