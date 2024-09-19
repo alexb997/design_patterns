@@ -1,22 +1,22 @@
 # Adapter Pattern Example
 
-This project demonstrates the Adapter Pattern by allowing an existing `AudioPlayer` to play additional media formats (.mp4 and .vlc) using an adapter.
+This project demonstrates the **Adapter Pattern** by creating a `MediaAdapter` that allows a `MediaPlayer` to handle various media formats, including `.mp3`, `.mp4`, `.vlc`, and `.wav`. The adapter also provides logging and error handling for unsupported formats.
 
 ## Project Structure
 
 - `src/adapter/MediaPlayer.java`: Interface for media players.
-- `src/adapter/AudioPlayer.java`: Existing class that plays MP3 files.
-- `src/adapter/MediaAdapter.java`: Adapter class to handle additional media formats.
-- `src/media/MP4Player.java`: Class to play MP4 files.
-- `src/media/VLCPlayer.java`: Class to play VLC files.
-- `src/Main.java`: Entry point to demonstrate the use of the adapter.
+- `src/adapter/Mp3Player.java`: Concrete implementation for `.mp3` files.
+- `src/adapter/MediaAdapter.java`: Adapter class to handle various media formats and log activities.
+- `src/log/Logger.java`: Logger class to handle logging of media activities.
+- `src/Main.java`: Entry point to demonstrate playing different media formats.
 
 ## How to Run
 
 1. **Compile the Java files:**
 
    ```bash
-   javac src/adapter/*.java src/media/*.java src/Main.java
+   javac src/adapter/*.java src/log/Logger.java src/Main.java
+
    ```
 
 2. **Run the main class:**
@@ -24,7 +24,7 @@ This project demonstrates the Adapter Pattern by allowing an existing `AudioPlay
    java -cp src Main
    ```
 
-You should see output indicating that the AudioPlayer can handle MP3 files directly, while MP4 and VLC files are handled through the adapter.
+You should see output demonstrating the playback of various media files and logging of these actions.
 
 ## How to Set Up the Project
 
@@ -39,22 +39,23 @@ You should see output indicating that the AudioPlayer can handle MP3 files direc
 2. **Create the src Directory:**
 
    ```bash
-   mkdir -p src/adapter src/media
+   mkdir src
+   mkdir src/adapter
+   mkdir src/log
 
    ```
 
 3. **Create java files:**
 
-   *Create MediaPlayer.java, AudioPlayer.java, and MediaAdapter.java in the src/adapter directory.
-   *Create MP4Player.java and VLCPlayer.java in the src/media directory.
-   *Create Main.java in the src directory.
-   *Create a README.md file in the root directory with the provided content.
+   *Create MediaPlayer.java, Mp3Player.java, and MediaAdapter.java in the src/adapter directory.
+   *Create Logger.java in the src/log directory.
+   \*Create Main.java in the src directory.
 
 4. **Compile & run:**
 
    ```bash
-   javac src/adapter/*.java src/media/*.java src/Main.java
+   javac src/adapter/*.java src/log/Logger.java src/Main.java
    java -cp src Main
    ```
 
-This setup shows how to use the Adapter Pattern to integrate new functionality with an existing class, providing a consistent interface for clients.
+This setup demonstrates how to use the Adapter Pattern to manage various media formats, handle unsupported formats gracefully, and log actions performed by the adapter.
