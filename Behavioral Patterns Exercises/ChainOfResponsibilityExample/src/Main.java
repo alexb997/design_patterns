@@ -1,24 +1,27 @@
-import support.LowLevelSupport;
-import support.MidLevelSupport;
-import support.HighLevelSupport;
-import support.SupportHandler;
+import support.*;
+import model.SupportRequest;
 
 public class Main {
     public static void main(String[] args) {
-        SupportHandler lowLevel = new LowLevelSupport();
-        SupportHandler midLevel = new MidLevelSupport();
-        SupportHandler highLevel = new HighLevelSupport();
 
-        lowLevel.setNext(midLevel);
-        midLevel.setNext(highLevel);
+        SupportHandler basicSupport = new BasicSupportHandler();
+        SupportHandler advancedSupport = new AdvancedSupportHandler();
+        SupportHandler supervisorSupport = new SupervisorSupportHandler();
 
-        System.out.println("Handling basic issue:");
-        lowLevel.handleRequest("basic issue");
+        basicSupport.setNextHandler(advancedSupport);
+        advancedSupport.setNextHandler(supervisorSupport);
 
-        System.out.println("\nHandling intermediate issue:");
-        lowLevel.handleRequest("intermediate issue");
+        SupportRequest request1 = new SupportRequest("REQ123", 1, "Password reset", "CUST001", 3000);
+        SupportRequest request2 = new SupportRequest("REQ124", 2, "Unable to connect", "CUST002", 3000);
+        SupportRequest request3 = new SupportRequest("REQ125", 3, "System crash", "CUST003", 3000);
 
-        System.out.println("\nHandling advanced issue:");
-        lowLevel.handleRequest("advanced issue");
+        System.out.println("Handling Request 1:");
+        basicSupport.handleRequest(request1);
+
+        System.out.println("\nHandling Request 2:");
+        basicSupport.handleRequest(request2);
+
+        System.out.println("\nHandling Request 3:");
+        basicSupport.handleRequest(request3);
     }
 }
