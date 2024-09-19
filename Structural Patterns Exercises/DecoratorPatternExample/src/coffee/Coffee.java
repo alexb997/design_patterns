@@ -1,6 +1,7 @@
 package coffee;
 
 public interface Coffee {
+    double getCost();
     String getDescription();
-    double cost();
+    int getCalories();
 }

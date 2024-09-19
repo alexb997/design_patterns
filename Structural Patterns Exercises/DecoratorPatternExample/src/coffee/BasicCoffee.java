@@ -2,12 +2,17 @@ package coffee;
 
 public class BasicCoffee implements Coffee {
     @Override
+    public double getCost() {
+        return 5.00;
+    }
+
+    @Override
     public String getDescription() {
         return "Basic Coffee";
     }
 
     @Override
-    public double cost() {
-        return 5.00;
+    public int getCalories() {
+        return 10;
     }
 }
