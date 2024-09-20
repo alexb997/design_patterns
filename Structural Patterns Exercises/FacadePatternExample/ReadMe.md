@@ -1,53 +1,76 @@
 # Facade Pattern Example
 
-This project demonstrates the **Facade Pattern** by simplifying the control of a home theater system with various subsystems using a `HomeTheaterFacade` class.
+This project demonstrates the **Facade Pattern** by creating a `HomeTheaterFacade` class to manage a home theater system consisting of subsystems like DVD Player, Projector, Sound System, and a new Lighting System.
+
+## New Features
+
+1. **Different Modes**: The facade supports switching between different modes:
+   - `watchMovie()`: Turns on the DVD player, projector, sound system, and dims the lights.
+   - `playMusic()`: Only starts the sound system and brightens the lights.
+   - `gamingMode()`: Starts the projector and sound system, and brightens the lights.
+2. **Volume Control**: The `volumeControl()` method allows adjusting the sound system volume directly.
+3. **Error Handling**: If a subsystem (e.g., DVD Player) fails, the system logs the error and attempts to recover gracefully.
 
 ## Project Structure
 
-- `src/subsystem/DVDPlayer.java`: Class for the DVD player subsystem, includes error simulation.
-- `src/subsystem/Projector.java`: Class for the projector subsystem.
-- `src/subsystem/SoundSystem.java`: Class for the sound system, includes volume control.
-- `src/subsystem/LightingSystem.java`: Class for controlling lighting (dim or bright lights).
-- `src/facade/HomeTheaterFacade.java`: Facade class to simplify interaction with the subsystems and handle errors.
-- `src/Main.java`: Entry point demonstrating various modes, volume control, and error handling.
+- `src/subsystem/`: Contains the individual components (DVDPlayer, Projector, SoundSystem, LightingSystem).
+- `src/facade/`: Contains the `HomeTheaterFacade` class that simplifies the usage of the subsystems.
+- `src/Main.java`: Demonstrates how to use the `HomeTheaterFacade` class.
 
 ## How to Run
 
-1. **Compile the Java files:**
+1. **Compile the Java files**:
 
    ```bash
    javac src/subsystem/*.java src/facade/HomeTheaterFacade.java src/Main.java
    ```
 
 2. **Run the main class:**
+
    ```bash
    java -cp src Main
    ```
 
-You should see output similar to the following, demonstrating various modes and volume control:
+## Input Parameters/Steps
 
+   - Call watchMovie() to start the home theater system.
+   - Call stopMovie() to stop the system.
+   - Switch to playMusic() mode.
+   - Use volumeControl() to adjust the sound.
+   - Call watchMovie() when the DVDPlayer subsystem fails.
+
+## Expected Results
+   - The watchMovie() mode turns on the DVD player, projector, sound system, and dims the lights.
+   - The playMusic() mode only starts the sound system and brightens the lights.
+   - The volume is adjusted correctly using volumeControl().
+   - When the DVDPlayer fails, an error is logged, and the system gracefully handles the failure.
+
+## Example Output:
 ```bash
-Preparing to watch movie...
+Setting up to watch a movie...
 DVD Player is on.
 Projector is on.
+Projector input set to DVD
 Sound system is on.
-Lights are dimmed for the movie.
+Lights are dimmed.
 Playing movie: Inception
-Volume set to: 75
-Shutting down the movie...
+Enjoy your movie!
+
+Shutting down movie mode...
 DVD Player is off.
 Projector is off.
 Sound system is off.
-Lights are bright.
-Preparing to play music...
+Lights are brightened.
+
+Switching to music mode...
 Sound system is on.
-Lights are bright.
-Music is playing.
-Preparing for gaming mode...
-Projector is on.
-Sound system is on.
-Lights are bright.
-Gaming mode activated.
+Playing music: Classical Symphony
+Lights are brightened.
+
+Sound system volume set to 8
+
+Setting up to watch a movie...
+Error: DVD Player failed. DVD Player is not on.
 ```
 
 ## How to Set Up the Project

@@ -26,7 +26,25 @@ This project demonstrates the **Decorator Pattern** by creating a `Coffee` class
    java -cp src Main
    ```
 
-You should see output similar to the following, demonstrating the cost, description, and calorie count:
+##Example Output:
+
+```bash
+Cost: $5.0
+Description: Basic Coffee
+Calories: 10
+Cost after milk and sugar: $5.7
+Description: Basic Coffee, Milk, Sugar
+Calories: 90
+Cost after whipped cream: $6.4
+Description: Basic Coffee, Milk, Sugar, Whipped Cream
+Calories: 170
+Cost after double milk: $6.9
+Description: Basic Coffee, Milk, Sugar, Whipped Cream, Milk
+Calories: 220
+Final Description: Basic Coffee, Milk, Sugar, Whipped Cream, Milk
+Final Cost: $6.9
+Final Calories: 220
+```
 
 ```bash
 Cost: $5.0

@@ -17,10 +17,14 @@ public class DVDPlayer {
     }
 
     public void playMovie(String movie) {
-        if (isOn) {
-            System.out.println("Playing movie: " + movie);
+        if (!isOn) {
+            throw new RuntimeException("DVD Player is not on.");
         } else {
-            System.out.println("Cannot play movie, DVD Player is off.");
+            System.out.println("Playing movie: " + movie);
         }
+    }
+    
+    public boolean isOn() {
+        return isOn;
     }
 }

@@ -19,4 +19,8 @@ public class SoundSystem {
     public int getVolume() {
         return volume;
     }
+
+    public void playMusic(String music) {
+        System.out.println("Playing music: " + music);
+    }
 }

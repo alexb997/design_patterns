@@ -12,12 +12,13 @@ public class Main {
 
         homeTheater.watchMovie("Inception");
 
-        homeTheater.volumeControl(75);
-
         homeTheater.stopMovie();
 
-        homeTheater.playMusic();
+        homeTheater.playMusic("Classical Symphony");
 
-        homeTheater.gamingMode();
+        homeTheater.volumeControl(8);
+
+        dvdPlayer.off();
+        homeTheater.watchMovie("The Matrix");
     }
 }

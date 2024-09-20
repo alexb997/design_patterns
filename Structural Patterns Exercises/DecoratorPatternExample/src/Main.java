@@ -6,15 +6,29 @@ import decorators.WhippedCreamDecorator;
 
 public class Main {
     public static void main(String[] args) {
-        Coffee myCoffee = new BasicCoffee();
-        System.out.println("Cost: $" + myCoffee.getCost());
-        System.out.println("Description: " + myCoffee.getDescription());
-        System.out.println("Calories: " + myCoffee.getCalories());
+        Coffee coffee = new BasicCoffee();
+        System.out.println("Cost: $" + coffee.getCost());
+        System.out.println("Description: " + coffee.getDescription());
+        System.out.println("Calories: " + coffee.getCalories());
 
-        myCoffee = new MilkDecorator(new MilkDecorator(new SugarDecorator(new WhippedCreamDecorator(myCoffee))));
-        
-        System.out.println("\nCost: $" + myCoffee.getCost());
-        System.out.println("Description: " + myCoffee.getDescription());
-        System.out.println("Calories: " + myCoffee.getCalories());
+        coffee = new MilkDecorator(coffee);
+        coffee = new SugarDecorator(coffee);
+        System.out.println("Cost after milk and sugar: $" + coffee.getCost());
+        System.out.println("Description: " + coffee.getDescription());
+        System.out.println("Calories: " + coffee.getCalories());
+
+        coffee = new WhippedCreamDecorator(coffee);
+        System.out.println("Cost after whipped cream: $" + coffee.getCost());
+        System.out.println("Description: " + coffee.getDescription());
+        System.out.println("Calories: " + coffee.getCalories());
+
+        coffee = new MilkDecorator(coffee);
+        System.out.println("Cost after double milk: $" + coffee.getCost());
+        System.out.println("Description: " + coffee.getDescription());
+        System.out.println("Calories: " + coffee.getCalories());
+
+        System.out.println("Final Description: " + coffee.getDescription());
+        System.out.println("Final Cost: $" + coffee.getCost());
+        System.out.println("Final Calories: " + coffee.getCalories());
     }
 }

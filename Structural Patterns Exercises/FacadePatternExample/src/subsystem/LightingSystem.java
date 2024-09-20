@@ -2,7 +2,7 @@ package subsystem;
 
 public class LightingSystem {
     public void dimLights() {
-        System.out.println("Lights are dimmed for the movie.");
+        System.out.println("Lights are dimmed.");
     }
 
     public void brightLights() {

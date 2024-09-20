@@ -17,52 +17,43 @@ public class HomeTheaterFacade {
 
     public void watchMovie(String movie) {
         try {
-            System.out.println("Preparing to watch movie...");
+            System.out.println("Setting up to watch a movie...");
             dvdPlayer.on();
             projector.on();
+            projector.setInput("DVD");
             soundSystem.on();
             lightingSystem.dimLights();
             dvdPlayer.playMovie(movie);
+            System.out.println("Enjoy your movie!");
         } catch (Exception e) {
-            System.err.println("Error: " + e.getMessage());
-            System.out.println("Attempting recovery...");
-            recoveryProcedure();
+            System.err.println("Error: DVD Player failed. " + e.getMessage());
         }
     }
 
-    public void playMusic() {
-        System.out.println("Preparing to play music...");
-        soundSystem.on();
-        lightingSystem.brightLights();
-        System.out.println("Music is playing.");
-    }
-
-    public void gamingMode() {
-        System.out.println("Preparing for gaming mode...");
-        projector.on();
-        soundSystem.on();
-        lightingSystem.brightLights();
-        System.out.println("Gaming mode activated.");
-    }
-
     public void stopMovie() {
-        System.out.println("Shutting down the movie...");
+        System.out.println("Shutting down movie mode...");
         dvdPlayer.off();
         projector.off();
         soundSystem.off();
         lightingSystem.brightLights();
     }
 
-    public void volumeControl(int volume) {
-        soundSystem.setVolume(volume);
+    public void playMusic(String music) {
+        System.out.println("Switching to music mode...");
+        soundSystem.on();
+        soundSystem.playMusic(music);
+        lightingSystem.brightLights(); 
     }
 
-    private void recoveryProcedure() {
-        System.out.println("Retrying to start the DVD Player...");
-        try {
-            dvdPlayer.on();
-        } catch (Exception e) {
-            System.err.println("Recovery failed. Please check the DVD Player.");
-        }
+    public void gamingMode() {
+        System.out.println("Switching to gaming mode...");
+        projector.on();
+        projector.setInput("Game Console");
+        soundSystem.on();
+        lightingSystem.brightLights();
+    }
+
+    public void volumeControl(int volume) {
+        soundSystem.setVolume(volume);
     }
 }
