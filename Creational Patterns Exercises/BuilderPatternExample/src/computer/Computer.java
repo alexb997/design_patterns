@@ -1,76 +1,49 @@
 package computer;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Computer {
     private String cpu;
     private String ram;
-    private String storage;
     private String graphicsCard;
-    private CoolingSystem coolingSystem;
+    private String coolingSystem;
+    private List<Component> components;
 
-    private Computer(Builder builder) {
-        this.cpu = builder.cpu;
-        this.ram = builder.ram;
-        this.storage = builder.storage;
-        this.graphicsCard = builder.graphicsCard;
-        this.coolingSystem = builder.coolingSystem;
+    public Computer() {
+        this.components = new ArrayList<>();
+    }
+
+    public void addComponent(Component component) {
+        this.components.add(component);
+    }
+
+    public void setCpu(String cpu) {
+        this.cpu = cpu;
+        addComponent(new Component("CPU", cpu, 300));
+    }
+
+    public void setRam(String ram) {
+        this.ram = ram;
+        addComponent(new Component("RAM", ram, 150));
+    }
+
+    public void setGraphicsCard(String graphicsCard) {
+        this.graphicsCard = graphicsCard;
+        addComponent(new Component("Graphics Card", graphicsCard, 400));
+    }
+
+    public void setCoolingSystem(String coolingSystem) {
+        this.coolingSystem = coolingSystem;
+        addComponent(new Component("Cooling System", coolingSystem, 100));
     }
 
     public double getPrice() {
-        double price = 0;
-        if (cpu != null) price += 100;
-        if (ram != null) price += 50;
-        if (storage != null) price += 75;
-        if (graphicsCard != null) price += 150;
-        if (coolingSystem != null) price += coolingSystem.getPrice();
-        return price;
+        return components.stream().mapToDouble(Component::getPrice).sum();
     }
 
     @Override
     public String toString() {
-        return "Computer [CPU=" + cpu + ", RAM=" + ram + ", Storage=" + storage + ", GraphicsCard=" + graphicsCard 
-                + ", CoolingSystem=" + (coolingSystem != null ? coolingSystem.getDescription() : "None") + "]";
-    }
-
-    public static class Builder {
-        private String cpu;
-        private String ram;
-        private String storage;
-        private String graphicsCard;
-        private CoolingSystem coolingSystem;
-
-        public Builder setCPU(String cpu) {
-            this.cpu = cpu;
-            return this;
-        }
-
-        public Builder setRAM(String ram) {
-            this.ram = ram;
-            return this;
-        }
-
-        public Builder setStorage(String storage) {
-            this.storage = storage;
-            return this;
-        }
-
-        public Builder setGraphicsCard(String graphicsCard) {
-            this.graphicsCard = graphicsCard;
-            return this;
-        }
-
-        public Builder setCoolingSystem(CoolingSystem coolingSystem) {
-            this.coolingSystem = coolingSystem;
-            return this;
-        }
-
-        public Computer build() {
-            if (cpu == null || ram == null) {
-                throw new IllegalStateException("CPU and RAM must be set");
-            }
-            if (cpu.equals("High-Performance") && coolingSystem == null) {
-                throw new IllegalStateException("High-Performance CPU requires a cooling system");
-            }
-            return new Computer(this);
-        }
+        return "Computer [CPU=" + cpu + ", RAM=" + ram + ", Graphics Card=" + graphicsCard + ", Cooling System=" + coolingSystem + "]";
     }
 }

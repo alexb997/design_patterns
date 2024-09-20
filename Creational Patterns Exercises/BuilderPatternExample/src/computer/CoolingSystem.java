@@ -1,6 +1,17 @@
 package computer;
 
-public abstract class CoolingSystem {
-    public abstract String getDescription();
-    public abstract double getPrice();
+public enum CoolingSystem {
+    AIR_COOLING("Air Cooling"),
+    LIQUID_COOLING("Liquid Cooling");
+
+    private String coolingType;
+
+    CoolingSystem(String coolingType) {
+        this.coolingType = coolingType;
+    }
+
+    @Override
+    public String toString() {
+        return coolingType;
+    }
 }

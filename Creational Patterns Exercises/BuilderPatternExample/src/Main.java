@@ -1,30 +1,42 @@
+import java.util.List;
+
 import computer.Computer;
-import computer.AirCooling;
-import computer.LiquidCooling;
 import computer.ComputerBuilder;
+import computer.CoolingSystem;
+import computer.HighPerformanceComputerException;
 
 public class Main {
     public static void main(String[] args) {
-        ComputerBuilder builder = new ComputerBuilder();
+        try {
+            ComputerBuilder builder = new ComputerBuilder();
+            Computer computer = builder
+                    .addCpu("Intel i7")
+                    .addRam("16GB")
+                    .addGraphicsCard("NVIDIA RTX 3080")
+                    .addCoolingSystem(CoolingSystem.AIR_COOLING)
+                    .build();
 
-        Computer computer1 = builder.buildComputer("High-Performance", "16GB", "1TB SSD", "NVIDIA GTX 3080", new LiquidCooling());
-        Computer computer2 = builder.buildComputer("Standard", "8GB", "512GB SSD", "Integrated", null);
-
-        var bulkComputers = builder.buildBulk(3, "High-Performance", "16GB", "1TB SSD", "NVIDIA GTX 3080", new AirCooling());
-
-        System.out.println("Individual Computers:");
-        System.out.println(computer1);
-        System.out.println("Price: $" + computer1.getPrice());
-        System.out.println();
-        System.out.println(computer2);
-        System.out.println("Price: $" + computer2.getPrice());
-        System.out.println();
-
-        System.out.println("Bulk Computers:");
-        for (Computer computer : bulkComputers) {
             System.out.println(computer);
             System.out.println("Price: $" + computer.getPrice());
-            System.out.println();
+
+            try {
+                Computer highPerfComputer = new ComputerBuilder()
+                        .addCpu("Intel i9")
+                        .addRam("32GB")
+                        .addGraphicsCard("NVIDIA RTX 3090")
+                        .build();
+            } catch (HighPerformanceComputerException e) {
+                System.err.println("Error: " + e.getMessage());
+            }
+
+            List<Computer> bulkComputers = builder.buildBulk(10);
+            System.out.println("\nBuilt 10 computers:");
+            for (int i = 0; i < bulkComputers.size(); i++) {
+                System.out.println("Computer " + (i + 1) + ": " + bulkComputers.get(i));
+            }
+
+        } catch (HighPerformanceComputerException e) {
+            System.err.println("Error: " + e.getMessage());
         }
     }
 }
