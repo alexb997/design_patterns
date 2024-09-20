@@ -2,49 +2,54 @@ package factory;
 
 import shapes.Shape;
 import shapes.Circle;
-import shapes.Square;
 import shapes.Rectangle;
+import shapes.Square;
 
 import java.util.LinkedList;
-import java.util.List;
+
+import java.util.Queue;
 
 public class ShapeFactory {
-    private static final int CACHE_SIZE = 5;
-    private List<Shape> shapeCache = new LinkedList<>();
+    private static final int CACHE_LIMIT = 5;
+    private Queue<Shape> shapeCache = new LinkedList<>();
 
-    public Shape createShape(String type, double... dimensions) {
+    public Shape createShape(String shapeType) throws InvalidShapeException {
+        return createShape(shapeType, -1, -1);
+    }
+
+    public Shape createShape(String shapeType, double dimensionW) throws InvalidShapeException {
+        return createShape(shapeType, dimensionW, -1);
+    }
+
+    public Shape createShape(String shapeType, double dimensionW, double dimensionH) throws InvalidShapeException {
         Shape shape = null;
 
-        switch (type.toLowerCase()) {
-            case "circle":
-                double radius = dimensions.length > 0 ? dimensions[0] : 1.0;
-                shape = new Circle(radius);
-                break;
-            case "square":
-                double side = dimensions.length > 0 ? dimensions[0] : 1.0;
-                shape = new Square(side);
-                break;
-            case "rectangle":
-                double width = dimensions.length > 0 ? dimensions[0] : 1.0;
-                double height = dimensions.length > 1 ? dimensions[1] : 1.0;
-                shape = new Rectangle(width, height);
-                break;
+        if ("Circle".equalsIgnoreCase(shapeType)) {
+            shape = (dimensionW > 0) ? new Circle(dimensionW) : new Circle();
+        } else if ("Square".equalsIgnoreCase(shapeType)) {
+            shape = (dimensionW > 0) ? new Square(dimensionW) : new Square();
+        } else if ("Rectangle".equalsIgnoreCase(shapeType)) {
+            shape = (dimensionW > 0 && dimensionH > 0) ? new Rectangle(dimensionW, dimensionH) : new Rectangle();      
+        } else {
+            throw new InvalidShapeException("Unsupported shape type: " + shapeType);
         }
 
-        if (shape != null) {
-            cacheShape(shape);
-        }
+        cacheShape(shape);
+
         return shape;
     }
 
     private void cacheShape(Shape shape) {
-        if (shapeCache.size() >= CACHE_SIZE) {
-            shapeCache.remove(0);
+        if (shapeCache.size() >= CACHE_LIMIT) {
+            shapeCache.poll();
         }
         shapeCache.add(shape);
     }
 
-    public List<Shape> getShapeCache() {
-        return shapeCache;
+    public void printCachedShapes() {
+        System.out.println("Cached Shapes:");
+        for (Shape shape : shapeCache) {
+            System.out.println(shape);
+        }
     }
 }

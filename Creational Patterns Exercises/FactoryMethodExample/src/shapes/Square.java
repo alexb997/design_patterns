@@ -1,7 +1,13 @@
 package shapes;
 
-public class Square implements Shape {
+public class Square extends Shape {
     private double side;
+
+    private static final double DEFAULT_SIDE = 1.0;
+
+    public Square() {
+        this.side = DEFAULT_SIDE;
+    }
 
     public Square(double side) {
         this.side = side;
@@ -18,7 +24,7 @@ public class Square implements Shape {
     }
 
     @Override
-    public String getDescription() {
-        return "Square with side length " + side;
+    public String toString() {
+        return String.format("Square (Side: %.2f)", side);
     }
 }

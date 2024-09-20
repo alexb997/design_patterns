@@ -1,35 +1,38 @@
 import shapes.Shape;
+import factory.InvalidShapeException;
 import factory.ShapeFactory;
 
 public class Main {
     public static void main(String[] args) {
-        ShapeFactory factory = new ShapeFactory();
+        ShapeFactory shapeFactory = new ShapeFactory();
 
-        Shape circle1 = factory.createShape("circle", 5.0);
-        Shape square1 = factory.createShape("square", 4.0);
-        Shape rectangle1 = factory.createShape("rectangle", 3.0, 6.0);
+        try {
+            Shape circle = shapeFactory.createShape("Circle", 5);
+            System.out.println(circle + " Area: " + circle.calculateArea() + " Perimeter: " + circle.calculatePerimeter());
 
-        Shape circle2 = factory.createShape("circle");
-        Shape square2 = factory.createShape("square");
-        Shape rectangle2 = factory.createShape("rectangle");
+            Shape square = shapeFactory.createShape("Square", 4);
+            System.out.println(square + " Area: " + square.calculateArea() + " Perimeter: " + square.calculatePerimeter());
 
-        displayShape(circle1);
-        displayShape(square1);
-        displayShape(rectangle1);
-        displayShape(circle2);
-        displayShape(square2);
-        displayShape(rectangle2);
+            Shape rectangle = shapeFactory.createShape("Rectangle", 6, 3);
+            System.out.println(rectangle + " Area: " + rectangle.calculateArea() + " Perimeter: " + rectangle.calculatePerimeter());
 
-        System.out.println("\nCached Shapes:");
-        for (Shape shape : factory.getShapeCache()) {
-            displayShape(shape);
+            Shape triangle = shapeFactory.createShape("Triangle");
+        } catch (InvalidShapeException e) {
+            System.err.println(e.getMessage());
         }
-    }
 
-    private static void displayShape(Shape shape) {
-        System.out.println(shape.getDescription());
-        System.out.println("Area: " + shape.calculateArea());
-        System.out.println("Perimeter: " + shape.calculatePerimeter());
-        System.out.println();
+        try {
+            Shape defaultCircle = shapeFactory.createShape("Circle");
+            Shape defaultSquare = shapeFactory.createShape("Square");
+            Shape defaultRectangle = shapeFactory.createShape("Rectangle");
+
+            System.out.println(defaultCircle + " Area: " + defaultCircle.calculateArea() + " Perimeter: " + defaultCircle.calculatePerimeter());
+            System.out.println(defaultSquare + " Area: " + defaultSquare.calculateArea() + " Perimeter: " + defaultSquare.calculatePerimeter());
+            System.out.println(defaultRectangle + " Area: " + defaultRectangle.calculateArea() + " Perimeter: " + defaultRectangle.calculatePerimeter());
+        } catch (InvalidShapeException e) {
+            System.err.println(e.getMessage());
+        }
+
+        shapeFactory.printCachedShapes();
     }
 }

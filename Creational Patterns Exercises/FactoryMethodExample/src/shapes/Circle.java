@@ -1,7 +1,13 @@
 package shapes;
 
-public class Circle implements Shape {
+public class Circle extends Shape {
     private double radius;
+
+    private static final double DEFAULT_RADIUS = 1.0;
+
+    public Circle() {
+        this.radius = DEFAULT_RADIUS;
+    }
 
     public Circle(double radius) {
         this.radius = radius;
@@ -18,7 +24,7 @@ public class Circle implements Shape {
     }
 
     @Override
-    public String getDescription() {
-        return "Circle with radius " + radius;
+    public String toString() {
+        return String.format("Circle (Radius: %.2f)", radius);
     }
 }
