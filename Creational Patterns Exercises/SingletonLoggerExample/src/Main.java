@@ -1,19 +1,24 @@
 import logger.Logger;
-import logger.Logger.LogMode;
+import logger.Logger.LogLevel;
 
 public class Main {
     public static void main(String[] args) {
         Logger logger = Logger.getInstance();
 
-        logger.setLogMode(LogMode.CONSOLE_ONLY);
-        logger.log("This is a console log message.");
+        logger.setLogLevel(LogLevel.INFO);
 
-        logger.setLogMode(LogMode.FILE_ONLY);
-        logger.log("This is a file log message.");
+        logger.log(LogLevel.INFO, "This is an INFO message.");
+        logger.log(LogLevel.DEBUG, "This DEBUG message should not appear.");
+        logger.log(LogLevel.ERROR, "This is an ERROR message.");
 
-        logger.setLogMode(LogMode.BOTH);
-        logger.log("This is a message logged to both console and file.");
+        logger.enableFileLogging();
+
+        logger.log(LogLevel.INFO, "Logging to both console and file.");
 
         logger.clearLogs();
+
+        logger.log(LogLevel.INFO, "Logging after clearing logs, with a timestamp.");
+
+        logger.closeLogger();
     }
 }

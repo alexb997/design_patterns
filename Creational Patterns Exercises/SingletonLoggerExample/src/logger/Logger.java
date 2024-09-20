@@ -3,22 +3,30 @@ package logger;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Logger {
+    private static Logger instance;
+    private LogLevel logLevel;
+    private boolean logToFile;
+    private int logCount;
+    private PrintWriter writer;
 
-    public enum LogMode {
-        CONSOLE_ONLY, FILE_ONLY, BOTH
+    public enum LogLevel {
+        INFO, DEBUG, ERROR
     }
 
-    private static Logger instance;
-
-    private LogMode logMode = LogMode.CONSOLE_ONLY;
-
-    private static final String LOG_FILE = "application.log";
-
-    private Logger() {}
+    private Logger() {
+        this.logLevel = LogLevel.INFO;
+        this.logToFile = false;
+        this.logCount = 0;
+        try {
+            writer = new PrintWriter(new FileWriter("logs/app.log", true));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public static Logger getInstance() {
         if (instance == null) {
@@ -27,47 +35,47 @@ public class Logger {
         return instance;
     }
 
-    public void setLogMode(LogMode mode) {
-        this.logMode = mode;
+    public void setLogLevel(LogLevel level) {
+        this.logLevel = level;
     }
 
-    public void log(String message) {
-        String timestampedMessage = getTimestamp() + " - " + message;
-
-        if (logMode == LogMode.CONSOLE_ONLY || logMode == LogMode.BOTH) {
-            logToConsole(timestampedMessage);
-        }
-
-        if (logMode == LogMode.FILE_ONLY || logMode == LogMode.BOTH) {
-            logToFile(timestampedMessage);
-        }
+    public void enableFileLogging() {
+        this.logToFile = true;
     }
 
-    private void logToConsole(String message) {
-        System.out.println(message);
-    }
+    public void log(LogLevel level, String message) {
+        if (level.ordinal() >= this.logLevel.ordinal()) {
+            String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+            String logMessage = String.format("[%s] %s: %s", timestamp, level, message);
 
-    private void logToFile(String message) {
-        try (FileWriter fw = new FileWriter(LOG_FILE, true);
-             PrintWriter pw = new PrintWriter(fw)) {
-            pw.println(message);
-        } catch (IOException e) {
-            System.err.println("Error writing to log file: " + e.getMessage());
+            System.out.println(logMessage);
+
+            if (logToFile) {
+                writer.println(logMessage);
+                writer.flush();
+            }
+
+            logCount++;
         }
     }
 
     public void clearLogs() {
-        try (PrintWriter pw = new PrintWriter(LOG_FILE)) {
-            pw.print("");
+        try {
+            PrintWriter fileCleaner = new PrintWriter("logs/app.log");
+            fileCleaner.close();
+
+            logCount = 0;
+            System.out.println("Logs cleared.");
         } catch (IOException e) {
-            System.err.println("Error clearing log file: " + e.getMessage());
+            e.printStackTrace();
         }
-        System.out.println("Logs cleared.");
     }
 
-    private String getTimestamp() {
-        LocalDateTime now = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        return now.format(formatter);
+    public int getLogCount() {
+        return logCount;
+    }
+
+    public void closeLogger() {
+        writer.close();
     }
 }
