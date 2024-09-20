@@ -37,4 +37,19 @@ public class PaymentContext {
             System.out.println("Payment successful.");
         }
     }
+
+    public boolean attemptPayment(double amount) {
+        System.out.println("Attempting to pay: " + amount + " in " + currency);
+
+        double fee = paymentStrategy.calculateProcessingFee(amount);
+        System.out.println("Processing fee: " + fee);
+
+        if (!paymentStrategy.processPayment(amount)) {
+            System.err.println("Payment failed.");
+            return false;
+        } else {
+            System.out.println("Payment successful.");
+            return true;
+        }
+    }
 }

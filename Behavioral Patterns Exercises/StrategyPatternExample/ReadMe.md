@@ -27,17 +27,34 @@ This project demonstrates the **Strategy Pattern** by implementing various payme
 The output will show the payment processing for each method, including handling of fees and retries:
 
 ```bash
+Step 1: Paying with Credit Card.
 Attempting to pay: 100.0 in USD
 Processing fee: 2.0
 Payment successful.
-Attempting to pay: 100.0 in EUR
+
+Step 2: Paying with PayPal.
+Attempting to pay: 200.0 in USD
+Processing fee: 6.0
+Payment successful.
+
+Step 3: Paying with Bitcoin.
+Attempting to pay: 300.0 in BTC
 Processing fee: 3.0
-Payment failed! Retrying...
-Payment retry successful.
-Attempting to pay: 100.0 in BTC
-Processing fee: 1.0
-Payment failed! Retrying...
-Payment failed again! Attempting to switch payment method...
+Payment successful.
+
+Step 4: Simulate PayPal failure, retry with Credit Card.
+Attempting to pay: 150.0 in USD
+Processing fee: 4.5
+Payment failed.
+Switching to Credit Card as fallback.
+Attempting to pay: 150.0 in USD
+Processing fee: 3.0
+Payment successful.
+
+Step 5: Paying in EUR.
+Attempting to pay: 100.0 in EUR
+Processing fee: 2.0
+Payment successful.
 ```
 
 ## How to Set Up the Project
