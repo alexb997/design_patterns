@@ -51,11 +51,20 @@ This project demonstrates the **Singleton** pattern by implementing a Logger cla
 ## Example Output
 
 ```bash
-[2024-09-19 14:22:13] INFO: This is an INFO message.
-[2024-09-19 14:22:13] ERROR: This is an ERROR message.
-[2024-09-19 14:22:13] INFO: Logging to both console and file.
+[2024-09-19 12:34:56] [INFO] This is an info log.
+[2024-09-19 12:34:56] [DEBUG] This is a debug log.
+[2024-09-19 12:34:56] [ERROR] This is an error log.
+[2024-09-19 12:34:56] [ERROR] This message goes to both console and file.
 Logs cleared.
-[2024-09-19 14:22:13] INFO: Logging after clearing logs, with a timestamp.
+Total logs count: 0
+```
+
+## Sample Log File Output (logs/app.log)
+
+```bash
+[2024-09-19 12:34:56] [INFO] Logging to file now.
+[2024-09-19 12:34:56] [DEBUG] Debugging in the file.
+[2024-09-19 12:34:56] [ERROR] This message goes to both console and file.
 ```
 
 ## How to Set Up the Project
