@@ -1,6 +1,7 @@
 package support;
 
 import model.SupportRequest;
+import java.util.Scanner;
 
 public abstract class SupportHandler {
     protected SupportHandler nextHandler;
@@ -14,6 +15,7 @@ public abstract class SupportHandler {
         logRequest(request);
         if (canHandleRequest(request)) {
             processRequest(request);
+            collectCustomerRating(request);
         } else if (nextHandler != null) {
             escalateRequest(request);
             nextHandler.handleRequest(request);
@@ -34,5 +36,13 @@ public abstract class SupportHandler {
         if (currentTime - startTime > request.getEscalationTime()) {
             System.out.println("Request " + request.getRequestId() + " has been escalated to the next level.");
         }
+    }
+
+    protected void collectCustomerRating(SupportRequest request) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Please rate the support for request " + request.getRequestId() + " (1-5): ");
+        int rating = scanner.nextInt();
+        request.setCustomerRating(rating);
+        System.out.println("Thank you! You rated the support: " + rating);
     }
 }

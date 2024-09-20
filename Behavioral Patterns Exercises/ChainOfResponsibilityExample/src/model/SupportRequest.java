@@ -6,6 +6,7 @@ public class SupportRequest {
     private String issueType;
     private String customerId;
     private long escalationTime;
+    private int customerRating;
     
     public SupportRequest(String requestId, int severityLevel, String issueType, String customerId, long escalationTime) {
         this.requestId = requestId;
@@ -13,6 +14,7 @@ public class SupportRequest {
         this.issueType = issueType;
         this.customerId = customerId;
         this.escalationTime = escalationTime;
+        this.customerRating = -1;
     }
 
     public String getRequestId() {
@@ -35,6 +37,14 @@ public class SupportRequest {
         return escalationTime;
     }
 
+    public void setCustomerRating(int rating) {
+        this.customerRating = rating;
+    }
+
+    public int getCustomerRating() {
+        return customerRating;
+    }
+
     @Override
     public String toString() {
         return "SupportRequest{" +
@@ -42,6 +52,7 @@ public class SupportRequest {
                 ", severityLevel=" + severityLevel +
                 ", issueType='" + issueType + '\'' +
                 ", customerId='" + customerId + '\'' +
+                ", customerRating=" + (customerRating != -1 ? customerRating : "Not rated") + 
                 '}';
     }
 }
