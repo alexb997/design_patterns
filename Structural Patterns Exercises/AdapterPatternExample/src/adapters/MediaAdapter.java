@@ -1,30 +1,34 @@
 package adapters;
 
-import log.Logger;
+import java.util.logging.Logger;
 
 public class MediaAdapter implements MediaPlayer {
-    private Mp3Player mp3Player;
-    private Logger logger;
+    AdvancedMediaPlayer advancedMusicPlayer;
+    private static final Logger logger = Logger.getLogger(MediaAdapter.class.getName());
 
-    public MediaAdapter() {
-        mp3Player = new Mp3Player();
-        logger = Logger.getInstance();
+    public MediaAdapter(String audioType) {
+        if (audioType.equalsIgnoreCase("mp4")) {
+            advancedMusicPlayer = new Mp4Player();
+        } else if (audioType.equalsIgnoreCase("vlc")) {
+            advancedMusicPlayer = new VlcPlayer();
+        } else if (audioType.equalsIgnoreCase("wav")) {
+            advancedMusicPlayer = new WavPlayer();
+        }
     }
 
     @Override
-    public void play(String fileName, String fileType) {
-        if (fileType.equalsIgnoreCase("mp3")) {
-            mp3Player.play(fileName, fileType);
-        } else if (fileType.equalsIgnoreCase("mp4")) {
-            System.out.println("Playing MP4 file: " + fileName);
-        } else if (fileType.equalsIgnoreCase("vlc")) {
-            System.out.println("Playing VLC file: " + fileName);
-        } else if (fileType.equalsIgnoreCase("wav")) {
-            System.out.println("Playing WAV file: " + fileName);
+    public void play(String audioType, String fileName) {
+        if (audioType.equalsIgnoreCase("mp4")) {
+            advancedMusicPlayer.playMp4(fileName);
+        } else if (audioType.equalsIgnoreCase("vlc")) {
+            advancedMusicPlayer.playVlc(fileName);
+        } else if (audioType.equalsIgnoreCase("wav")) {
+            advancedMusicPlayer.playWav(fileName);
         } else {
-            System.out.println("Unsupported format: " + fileType);
+            System.out.println("Unsupported format: " + audioType);
+            logger.warning("Unsupported format: " + audioType);
         }
 
-        logger.log("Played file: " + fileName + " with format: " + fileType);
+        logger.info("Playing " + fileName + " of format: " + audioType);
     }
 }

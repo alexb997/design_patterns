@@ -1,14 +1,15 @@
-import adapters.MediaAdapter;
-import adapters.MediaPlayer;
+import adapters.AudioPlayer;
 
 public class Main {
     public static void main(String[] args) {
-        MediaPlayer mediaPlayer = new MediaAdapter();
+        AudioPlayer audioPlayer = new AudioPlayer();
 
-        mediaPlayer.play("song1.mp3", "mp3");
-        mediaPlayer.play("movie.mp4", "mp4");
-        mediaPlayer.play("documentary.vlc", "vlc");
-        mediaPlayer.play("sound.wav", "wav");
-        mediaPlayer.play("unknown.xyz", "xyz");
+        audioPlayer.play("mp3", "song.mp3");
+
+        audioPlayer.play("mp4", "movie.mp4");
+
+        audioPlayer.play("vlc", "video.vlc");
+
+        audioPlayer.play("avi", "file.avi");
     }
 }

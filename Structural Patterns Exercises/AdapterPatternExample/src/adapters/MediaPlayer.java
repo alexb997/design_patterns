@@ -1,5 +1,5 @@
 package adapters;
 
 public interface MediaPlayer {
-    void play(String fileName, String fileType);
+    void play(String audioType, String fileName);
 }
