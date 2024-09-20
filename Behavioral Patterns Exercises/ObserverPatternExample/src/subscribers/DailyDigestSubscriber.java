@@ -29,9 +29,9 @@ public class DailyDigestSubscriber implements Subscriber {
         return preferredNewsType;
     }
 
-    public void sendDailyDigest() {
+    public void sendDailyDigest(List<String> allNews) {
         System.out.println(name + "'s Daily Digest: ");
-        for (String news : dailyDigest) {
+        for (String news : allNews) {
             System.out.println(news);
         }
         dailyDigest.clear();
@@ -45,3 +45,4 @@ public class DailyDigestSubscriber implements Subscriber {
                 '}';
     }
 }
+

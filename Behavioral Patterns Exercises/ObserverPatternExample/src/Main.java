@@ -26,6 +26,6 @@ public class Main {
 
         newsAgency.sendPersonalMessage(emailSubscriber1, "Special sports offer for Alice!");
 
-        dailyDigestSubscriber.sendDailyDigest();
+        newsAgency.sendDailyDigest();
     }
 }
