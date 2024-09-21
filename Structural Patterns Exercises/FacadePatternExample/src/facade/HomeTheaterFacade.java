@@ -1,18 +1,24 @@
 package facade;
 
 import subsystem.*;
+import config.CustomConfiguration;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class HomeTheaterFacade {
     private DVDPlayer dvdPlayer;
     private Projector projector;
     private SoundSystem soundSystem;
     private LightingSystem lightingSystem;
+    private Map<String, CustomConfiguration> customConfigurations;
 
     public HomeTheaterFacade(DVDPlayer dvdPlayer, Projector projector, SoundSystem soundSystem, LightingSystem lightingSystem) {
         this.dvdPlayer = dvdPlayer;
         this.projector = projector;
         this.soundSystem = soundSystem;
         this.lightingSystem = lightingSystem;
+        this.customConfigurations = new HashMap<>();
     }
 
     public void watchMovie(String movie) {
@@ -27,6 +33,18 @@ public class HomeTheaterFacade {
             System.out.println("Enjoy your movie!");
         } catch (Exception e) {
             System.err.println("Error: DVD Player failed. " + e.getMessage());
+            recoverFromDVDPlayerFailure(movie);
+        }
+    }
+
+    private void recoverFromDVDPlayerFailure(String movie) {
+        System.out.println("Attempting to recover...");
+        try {
+            Thread.sleep(1000);  // Simulate recovery
+            dvdPlayer.on();  // Retry starting the DVD player
+            dvdPlayer.playMovie(movie);
+        } catch (Exception e) {
+            System.err.println("Recovery failed. Please check your system.");
         }
     }
 
@@ -42,7 +60,7 @@ public class HomeTheaterFacade {
         System.out.println("Switching to music mode...");
         soundSystem.on();
         soundSystem.playMusic(music);
-        lightingSystem.brightLights(); 
+        lightingSystem.brightLights();
     }
 
     public void gamingMode() {
@@ -55,5 +73,26 @@ public class HomeTheaterFacade {
 
     public void volumeControl(int volume) {
         soundSystem.setVolume(volume);
+    }
+
+    public void saveCustomConfiguration(String name, boolean dimLights, int volumeLevel) {
+        CustomConfiguration config = new CustomConfiguration(name, dimLights, volumeLevel);
+        customConfigurations.put(name, config);
+        System.out.println("Custom configuration '" + name + "' saved.");
+    }
+
+    public void loadCustomConfiguration(String name) {
+        CustomConfiguration config = customConfigurations.get(name);
+        if (config != null) {
+            System.out.println("Loading configuration: " + config);
+            if (config.isDimLights()) {
+                lightingSystem.dimLights();
+            } else {
+                lightingSystem.brightLights();
+            }
+            soundSystem.setVolume(config.getVolumeLevel());
+        } else {
+            System.out.println("Configuration '" + name + "' not found.");
+        }
     }
 }

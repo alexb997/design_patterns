@@ -20,5 +20,11 @@ public class Main {
 
         dvdPlayer.off();
         homeTheater.watchMovie("The Matrix");
+
+        homeTheater.saveCustomConfiguration("Movie Night", true, 10);
+
+        homeTheater.loadCustomConfiguration("Movie Night");
+
+        homeTheater.gamingMode();
     }
 }

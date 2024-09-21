@@ -2,9 +2,9 @@ package subsystem;
 
 public class DVDPlayer {
     private boolean isOn = false;
-    
+
     public void on() throws Exception {
-        if (Math.random() > 0.8) {
+        if (Math.random() > 0.8) {  // 20% chance of failure
             throw new Exception("DVD Player failed to start.");
         }
         isOn = true;
@@ -23,7 +23,7 @@ public class DVDPlayer {
             System.out.println("Playing movie: " + movie);
         }
     }
-    
+
     public boolean isOn() {
         return isOn;
     }
