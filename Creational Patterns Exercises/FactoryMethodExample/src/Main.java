@@ -16,6 +16,9 @@ public class Main {
             Shape rectangle = shapeFactory.createShape("Rectangle", 6, 3);
             System.out.println(rectangle + " Area: " + rectangle.calculateArea() + " Perimeter: " + rectangle.calculatePerimeter());
 
+            Shape modifiedSquare = shapeFactory.modifyShape(square, 3.0, null);
+            System.out.println(modifiedSquare + " (modified) | Area: " + modifiedSquare.calculateArea() + " | Perimeter: " + modifiedSquare.calculatePerimeter());
+
             Shape triangle = shapeFactory.createShape("Triangle");
         } catch (InvalidShapeException e) {
             System.err.println(e.getMessage());

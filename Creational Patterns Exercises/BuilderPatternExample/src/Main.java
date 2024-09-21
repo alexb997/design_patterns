@@ -29,6 +29,14 @@ public class Main {
                 System.err.println("Error: " + e.getMessage());
             }
 
+            Computer gamingComputer = new ComputerBuilder()
+                    .configureForGaming()
+                    .build();
+
+            System.out.println("\nGaming Computer:");
+            System.out.println(gamingComputer);
+            System.out.println("Price: $" + gamingComputer.getPrice());
+
             List<Computer> bulkComputers = builder.buildBulk(10);
             System.out.println("\nBuilt 10 computers:");
             for (int i = 0; i < bulkComputers.size(); i++) {
