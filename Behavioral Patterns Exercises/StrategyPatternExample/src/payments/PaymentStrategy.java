@@ -1,7 +1,6 @@
 package payments;
 
 public interface PaymentStrategy {
-    void pay(double amount, String currency);
+    void processPayment(double amount) throws PaymentException;
     double calculateProcessingFee(double amount);
-    boolean processPayment(double amount);
 }

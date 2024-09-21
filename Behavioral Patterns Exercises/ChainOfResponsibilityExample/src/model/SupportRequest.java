@@ -1,28 +1,21 @@
 package model;
 
 public class SupportRequest {
-    private String requestId;
-    private int severityLevel;
+    private String severity;
     private String issueType;
     private String customerId;
-    private long escalationTime;
-    private int customerRating;
-    
-    public SupportRequest(String requestId, int severityLevel, String issueType, String customerId, long escalationTime) {
-        this.requestId = requestId;
-        this.severityLevel = severityLevel;
+    private int timeToResolve; // in minutes
+    private int rating = 0;
+
+    public SupportRequest(String severity, String issueType, String customerId, int timeToResolve) {
+        this.severity = severity;
         this.issueType = issueType;
         this.customerId = customerId;
-        this.escalationTime = escalationTime;
-        this.customerRating = -1;
+        this.timeToResolve = timeToResolve;
     }
 
-    public String getRequestId() {
-        return requestId;
-    }
-
-    public int getSeverityLevel() {
-        return severityLevel;
+    public String getSeverity() {
+        return severity;
     }
 
     public String getIssueType() {
@@ -33,26 +26,30 @@ public class SupportRequest {
         return customerId;
     }
 
-    public long getEscalationTime() {
-        return escalationTime;
+    public int getTimeToResolve() {
+        return timeToResolve;
     }
 
-    public void setCustomerRating(int rating) {
-        this.customerRating = rating;
+    public void escalate() {
+        if (severity.equals("Low")) {
+            severity = "Medium";
+        } else if (severity.equals("Medium")) {
+            severity = "High";
+        }
     }
 
-    public int getCustomerRating() {
-        return customerRating;
+    public void setRating(int rating) {
+        this.rating = rating;
     }
 
     @Override
     public String toString() {
         return "SupportRequest{" +
-                "requestId='" + requestId + '\'' +
-                ", severityLevel=" + severityLevel +
+                "severity='" + severity + '\'' +
                 ", issueType='" + issueType + '\'' +
                 ", customerId='" + customerId + '\'' +
-                ", customerRating=" + (customerRating != -1 ? customerRating : "Not rated") + 
+                ", timeToResolve=" + timeToResolve +
+                ", rating=" + rating +
                 '}';
     }
 }

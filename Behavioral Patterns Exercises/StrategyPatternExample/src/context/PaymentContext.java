@@ -1,55 +1,49 @@
 package context;
 
+import payments.CreditCardPayment;
+import payments.CurrencyConverter;
+import payments.Discount;
+import payments.PaymentException;
 import payments.PaymentStrategy;
 
 public class PaymentContext {
     private PaymentStrategy paymentStrategy;
-    private String currency;
+    private Discount discount;
+    private String preferredCurrency;
 
-    public PaymentContext(PaymentStrategy paymentStrategy, String currency) {
+    public PaymentContext(PaymentStrategy paymentStrategy, Discount discount, String preferredCurrency) {
         this.paymentStrategy = paymentStrategy;
-        this.currency = currency;
+        this.discount = discount;
+        this.preferredCurrency = preferredCurrency;
     }
 
     public void setPaymentStrategy(PaymentStrategy paymentStrategy) {
         this.paymentStrategy = paymentStrategy;
     }
 
-    public void setCurrency(String currency) {
-        this.currency = currency;
+    public void setDiscount(Discount discount) {
+        this.discount = discount;
     }
 
-    public void pay(double amount) {
-        System.out.println("Attempting to pay: " + amount + " in " + currency);
+    public void setPreferredCurrency(String preferredCurrency) {
+        this.preferredCurrency = preferredCurrency;
+    }
 
-        double fee = paymentStrategy.calculateProcessingFee(amount);
-        System.out.println("Processing fee: " + fee);
-
-        if (!paymentStrategy.processPayment(amount)) {
-            System.err.println("Payment failed! Retrying...");
-
-            if (!paymentStrategy.processPayment(amount)) {
-                System.err.println("Payment failed again! Attempting to switch payment method...");
-            } else {
-                System.out.println("Payment retry successful.");
+    public void processPayment(double amount) throws PaymentException {
+        double discountedAmount = discount.applyDiscount(amount);
+        double convertedAmount = CurrencyConverter.convertToPreferredCurrency(discountedAmount, preferredCurrency);
+        try {
+            paymentStrategy.processPayment(convertedAmount);
+        } catch (PaymentException e) {
+            System.out.println("Payment failed: " + e.getMessage());
+            System.out.println("Retrying payment with same method...");
+            try {
+                paymentStrategy.processPayment(convertedAmount);
+            } catch (PaymentException retryException) {
+                System.out.println("Retry failed. Switching to backup payment method...");
+                setPaymentStrategy(new CreditCardPayment());
+                paymentStrategy.processPayment(convertedAmount);
             }
-        } else {
-            System.out.println("Payment successful.");
-        }
-    }
-
-    public boolean attemptPayment(double amount) {
-        System.out.println("Attempting to pay: " + amount + " in " + currency);
-
-        double fee = paymentStrategy.calculateProcessingFee(amount);
-        System.out.println("Processing fee: " + fee);
-
-        if (!paymentStrategy.processPayment(amount)) {
-            System.err.println("Payment failed.");
-            return false;
-        } else {
-            System.out.println("Payment successful.");
-            return true;
         }
     }
 }

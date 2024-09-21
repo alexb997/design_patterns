@@ -2,32 +2,34 @@ import support.*;
 import model.SupportRequest;
 
 public class Main {
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
+        LowLevelSupportHandler lowHandler = new LowLevelSupportHandler();
+        MediumLevelSupportHandler mediumHandler = new MediumLevelSupportHandler();
+        HighLevelSupportHandler highHandler = new HighLevelSupportHandler();
 
-        SupportHandler basicSupport = new BasicSupportHandler();
-        SupportHandler advancedSupport = new AdvancedSupportHandler();
-        SupportHandler supervisorSupport = new SupervisorSupportHandler();
+        lowHandler.setNextHandler(mediumHandler);
+        mediumHandler.setNextHandler(highHandler);
 
-        basicSupport.setNextHandler(advancedSupport);
-        advancedSupport.setNextHandler(supervisorSupport);
+        SupportRequest lowRequest = new SupportRequest("Low", "Password Reset", "C123", 5);
+        SupportRequest mediumRequest = new SupportRequest("Medium", "Software Crash", "C456", 30);
+        SupportRequest highRequest = new SupportRequest("High", "Data Loss", "C789", 120);
 
-        SupportRequest request1 = new SupportRequest("REQ123", 1, "Password reset", "CUST001", 3000);
-        SupportRequest request2 = new SupportRequest("REQ124", 2, "Unable to connect", "CUST002", 3000);
-        SupportRequest request3 = new SupportRequest("REQ125", 3, "System crash", "CUST003", 3000);
+        System.out.println("Processing Low-Level Request:");
+        lowHandler.handleRequest(lowRequest);
 
-        System.out.println("Handling Request 1 (Low severity):");
-        basicSupport.handleRequest(request1);
+        System.out.println("\nProcessing Medium-Level Request:");
+        lowHandler.handleRequest(mediumRequest);
 
-        Thread.sleep(2000);
-        System.out.println("\nHandling Request 2 (Medium severity):");
-        basicSupport.handleRequest(request2);
+        System.out.println("\nProcessing High-Level Request:");
+        lowHandler.handleRequest(highRequest);
 
-        Thread.sleep(4000);
-        System.out.println("\nHandling Request 3 (High severity):");
-        basicSupport.handleRequest(request3);
-        
-        System.out.println("\nEscalating Request 3 after delay:");
-        Thread.sleep(3000);
-        basicSupport.handleRequest(request3);
+        SupportRequest delayedRequest = new SupportRequest("Low", "Network Issue", "C012", 60);
+        System.out.println("\nEscalating Delayed Request:");
+        delayedRequest.escalate();
+        lowHandler.handleRequest(delayedRequest);
+
+        System.out.println("\nCustomer rates support:");
+        delayedRequest.setRating(5);
+        System.out.println(delayedRequest);
     }
 }
