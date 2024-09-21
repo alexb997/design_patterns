@@ -25,6 +25,14 @@ public class ComputerBuilder {
         return this;
     }
 
+    public ComputerBuilder configureForGaming() {
+        this.addCpu("Intel i9")
+            .addRam("32GB")
+            .addGraphicsCard("NVIDIA RTX 3090")
+            .addCoolingSystem(CoolingSystem.LIQUID_COOLING);
+        return this;
+    }
+
     public ComputerBuilder addCoolingSystem(CoolingSystem coolingSystem) {
         computer.setCoolingSystem(coolingSystem.toString());
         return this;

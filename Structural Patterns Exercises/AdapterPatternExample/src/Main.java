@@ -6,10 +6,14 @@ public class Main {
 
         audioPlayer.play("mp3", "song.mp3");
 
-        audioPlayer.play("mp4", "movie.mp4");
+        audioPlayer.play("mp4", "video.mp4");
 
-        audioPlayer.play("vlc", "video.vlc");
+        audioPlayer.play("vlc", "movie.vlc");
 
-        audioPlayer.play("avi", "file.avi");
+        audioPlayer.play("wav", "sound.wav");
+
+        audioPlayer.play("avi", "clip.avi");
+
+        audioPlayer.play("mkv", "film.mkv");
     }
 }
