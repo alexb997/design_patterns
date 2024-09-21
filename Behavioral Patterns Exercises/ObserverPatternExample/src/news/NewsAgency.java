@@ -19,6 +19,16 @@ public class NewsAgency {
         subscribers.remove(subscriber);
     }
 
+    public void pauseSubscription(Subscriber subscriber) {
+        subscriber.setPaused(true);
+        System.out.println(subscriber.getName() + " has paused their subscription.");
+    }
+
+    public void resumeSubscription(Subscriber subscriber) {
+        subscriber.setPaused(false);
+        System.out.println(subscriber.getName() + " has resumed their subscription.");
+    }
+
     public void publishNews(String news, NewsType newsType) {
         System.out.println("Publishing news: " + news + " [" + newsType + "]");
         dailyDigest.add(news + " [" + newsType + "]");

@@ -1,34 +1,51 @@
 package subscribers;
 
 import news.NewsType;
+import java.util.Set;
 
 public class EmailSubscriber implements Subscriber {
 
     private String name;
-    private NewsType preferredNewsType;
+    private Set<NewsType> preferredNewsTypes;
+    private boolean paused;
 
-    public EmailSubscriber(String name, NewsType preferredNewsType) {
+    public EmailSubscriber(String name, Set<NewsType> preferredNewsTypes) {
         this.name = name;
-        this.preferredNewsType = preferredNewsType;
+        this.preferredNewsTypes = preferredNewsTypes;
+        this.paused = false;
     }
 
     @Override
     public void update(String news, NewsType newsType) {
-        if (this.preferredNewsType == newsType || this.preferredNewsType == NewsType.GENERAL) {
-            System.out.println(name + " (Email) received: " + news + " [" + newsType + "]");
-        }
+        System.out.println(name + " (Email) received: " + news + " [" + newsType + "]");
     }
 
     @Override
-    public NewsType getPreferredNewsType() {
-        return preferredNewsType;
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public Set<NewsType> getPreferredNewsTypes() {
+        return preferredNewsTypes;
+    }
+
+    @Override
+    public boolean isPaused() {
+        return paused;
+    }
+
+    @Override
+    public void setPaused(boolean paused) {
+        this.paused = paused;
     }
 
     @Override
     public String toString() {
         return "EmailSubscriber{" +
                 "name='" + name + '\'' +
-                ", preferredNewsType=" + preferredNewsType +
+                ", preferredNewsTypes=" + preferredNewsTypes +
+                ", paused=" + paused +
                 '}';
     }
 }
