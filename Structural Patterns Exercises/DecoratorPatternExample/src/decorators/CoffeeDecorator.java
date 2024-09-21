@@ -3,24 +3,24 @@ package decorators;
 import coffee.Coffee;
 
 public abstract class CoffeeDecorator implements Coffee {
-    protected Coffee coffee;
+    protected Coffee decoratedCoffee;
 
     public CoffeeDecorator(Coffee coffee) {
-        this.coffee = coffee;
-    }
-
-    @Override
-    public double getCost() {
-        return coffee.getCost();
+        this.decoratedCoffee = coffee;
     }
 
     @Override
     public String getDescription() {
-        return coffee.getDescription();
+        return decoratedCoffee.getDescription();
+    }
+
+    @Override
+    public double getCost() {
+        return decoratedCoffee.getCost();
     }
 
     @Override
     public int getCalories() {
-        return coffee.getCalories();
+        return decoratedCoffee.getCalories();
     }
 }

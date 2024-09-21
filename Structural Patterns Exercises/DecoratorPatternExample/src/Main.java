@@ -1,12 +1,13 @@
 import coffee.BasicCoffee;
 import coffee.Coffee;
+import coffee.Size;
 import decorators.MilkDecorator;
 import decorators.SugarDecorator;
 import decorators.WhippedCreamDecorator;
 
 public class Main {
     public static void main(String[] args) {
-        Coffee coffee = new BasicCoffee();
+        Coffee coffee = new BasicCoffee(Size.SMALL);
         System.out.println("Cost: $" + coffee.getCost());
         System.out.println("Description: " + coffee.getDescription());
         System.out.println("Calories: " + coffee.getCalories());

@@ -3,23 +3,22 @@ package decorators;
 import coffee.Coffee;
 
 public class WhippedCreamDecorator extends CoffeeDecorator {
-
     public WhippedCreamDecorator(Coffee coffee) {
         super(coffee);
     }
 
     @Override
-    public double getCost() {
-        return super.getCost() + 0.70;
+    public String getDescription() {
+        return decoratedCoffee.getDescription() + ", Whipped Cream";
     }
 
     @Override
-    public String getDescription() {
-        return super.getDescription() + " with Whipped Cream";
+    public double getCost() {
+        return decoratedCoffee.getCost() + 0.7;
     }
 
     @Override
     public int getCalories() {
-        return super.getCalories() + 80;
+        return decoratedCoffee.getCalories() + 100;
     }
 }
